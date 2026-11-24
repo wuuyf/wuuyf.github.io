@@ -2,5 +2,5 @@
 
 👉 **https://wuuyf.github.io**
 
-My link page — drawing, cats and code, all in one place.
+My link page.
 Plain HTML/CSS, no framework, no ads. Deployed with GitHub Pages.
