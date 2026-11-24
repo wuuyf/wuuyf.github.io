@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>YuFan 🐾</title>
+  <meta name="description" content="畫畫・貓咪・資訊" />
+
+  <meta property="og:title" content="YuFan 🐾" />
+  <meta property="og:description" content="畫畫・貓咪・資訊 🐱🎨💻" />
+  <meta property="og:image" content="https://wuuyf.github.io/images/avatar.jpg" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =====================================================
+       VOICE  : 可愛、溫暖
+       IDEA   : 一張黃白格紋野餐布上的小名片
+       PICTURE: 小熊頭像＋三張像貼紙的連結卡片
+       COLOUR : 奶油黃格紋、杏橘、深咖啡
+       TYPE   : Huninn（粉圓）
+       LAYOUT : 手機優先的單欄，電腦上維持手機寬度置中
+       ===================================================== */
+    :root {
+      --cream: #FFF9E4;
+      --ging: rgba(247, 220, 126, .33);
+      --card: #FFFDF5;
+      --apricot: #F6C987;
+      --brown: #5C3D24;
+      --brown-soft: #8B6A4E;
+      --sunflower: #F2B33D;
+    }
+    *, *::before, *::after { box-sizing: border-box; min-width: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; min-height: 100vh;
+      font: 16px/1.6 "Huninn", "PingFang TC", "Hiragino Maru Gothic ProN", system-ui, sans-serif;
+      color: var(--brown);
+      background-color: var(--cream);
+      background-image:
+        linear-gradient(90deg, var(--ging) 50%, transparent 50%),
+        linear-gradient(var(--ging) 50%, transparent 50%);
+      background-size: 56px 56px;
+      background-attachment: fixed;
+      overflow-x: clip;
+    }
+    main {
+      max-width: 480px; margin: 0 auto;
+      padding: calc(48px + env(safe-area-inset-top)) 20px calc(40px + env(safe-area-inset-bottom));
+      text-align: center;
+    }
+
+    /* ---------- 頭像與名稱 ---------- */
+    .avatar {
+      position: relative; display: inline-block;
+      width: 128px; height: 128px;
+      animation: pop .6s cubic-bezier(.34, 1.56, .64, 1) both;
+    }
+    .avatar img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      border-radius: 50%;
+      border: 4px solid var(--card);
+      box-shadow: 0 0 0 3px var(--brown), 0 6px 0 3px var(--brown);
+    }
+    .avatar .flower {
+      position: absolute; right: -6px; bottom: 4px;
+      font-size: 1.7rem; line-height: 1;
+      animation: sway 3s ease-in-out infinite;
+    }
+    h1 { margin: 22px 0 4px; font-size: 1.9rem; font-weight: 400; letter-spacing: .02em; }
+    .tagline { margin: 0; font-size: 1.05rem; }
+
+    /* ---------- 連結卡片 ---------- */
+    .links { display: grid; gap: 16px; margin: 32px 0 0; padding: 0; list-style: none; }
+    .links li { animation: rise .5s ease-out both; }
+    .links li:nth-child(1) { animation-delay: .15s; }
+    .links li:nth-child(2) { animation-delay: .25s; }
+    .links li:nth-child(3) { animation-delay: .35s; }
+    .links li:nth-child(4) { animation-delay: .45s; }
+    .links li:nth-child(5) { animation-delay: .55s; }
+
+    .link {
+      display: flex; align-items: center; gap: 14px;
+      min-height: 84px; padding: 12px 18px 12px 12px;
+      background: var(--card);
+      border: 3px solid var(--brown); border-radius: 24px;
+      box-shadow: 0 5px 0 var(--brown);
+      color: inherit; text-decoration: none; text-align: left;
+      transition: transform .15s, box-shadow .15s, background .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .link:hover { background: #FFF3D2; transform: translateY(-2px); box-shadow: 0 7px 0 var(--brown); }
+    .link:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--brown); }
+    .link:focus-visible { outline: 3px solid var(--sunflower); outline-offset: 4px; }
+
+    .thumb {
+      flex: none; width: 58px; height: 58px;
+      border-radius: 16px; overflow: hidden;
+      border: 2px solid var(--brown);
+      display: grid; place-items: center;
+      background: var(--apricot);
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .thumb svg { width: 32px; height: 32px; fill: var(--brown); }
+    .text { flex: 1; }
+    .title { display: block; font-size: 1.2rem; line-height: 1.35; }
+    .desc { display: block; font-size: .92rem; color: var(--brown-soft); }
+    .arrow { flex: none; font-size: 1.3rem; color: var(--brown-soft); transition: transform .15s; }
+    .link:hover .arrow { transform: translateX(3px); }
+
+    footer { margin-top: 40px; font-size: .85rem; color: var(--brown-soft); }
+
+    @keyframes pop { from { opacity: 0; transform: scale(.6); } }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+    @keyframes sway { 0%, 100% { transform: rotate(-12deg); } 50% { transform: rotate(12deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="avatar">
+      <img src="images/avatar.jpg" alt="YuFan 的頭像" width="128" height="128" />
+      <span class="flower" aria-hidden="true">🌻</span>
+    </div>
+    <h1>YuFan</h1>
+    <p class="tagline">畫畫・貓咪・資訊 🐱🎨💻</p>
+
+    <!--
+      ✏️ 新增連結：複製一整段 <li>…</li>，改掉 href、圖片、標題和說明就好
+      縮圖放在 images/ 資料夾，正方形、約 240px 就夠
+    -->
+    <ul class="links">
+      <li>
+        <a class="link" href="https://github.com/wuuyf" target="_blank" rel="noopener">
+          <span class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          </span>
+          <span class="text">
+            <span class="title">GitHub</span>
+            <span class="desc">程式與研究</span>
+          </span>
+          <span class="arrow" aria-hidden="true">›</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="link" href="https://wuuyf.github.io/pudding-strawberry/" target="_blank" rel="noopener">
+          <span class="thumb"><img src="images/cats.jpg" alt="" /></span>
+          <span class="text">
+            <span class="title">🐾 布丁 & 草莓</span>
+            <span class="desc">我家貓咪介紹</span>
+          </span>
+          <span class="arrow" aria-hidden="true">›</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="link" href="https://wuuyf.github.io/Art-Journey/" target="_blank" rel="noopener">
+          <span class="thumb"><img src="images/nengajo.jpg" alt="" /></span>
+          <span class="text">
+            <span class="title">⛩️ 年賀狀</span>
+            <span class="desc">每年元旦的手繪賀卡</span>
+          </span>
+          <span class="arrow" aria-hidden="true">›</span>
+        </a>
+      </li>
+    </ul>
+
+    <footer>© YuFan</footer>
+  </main>
+</body>
+</html>
